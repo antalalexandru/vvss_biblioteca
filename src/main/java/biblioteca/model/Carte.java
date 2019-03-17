@@ -10,7 +10,7 @@ public class Carte {
 	private List<String> referenti;
 	private String anAparitie;
 	private List<String> cuvinteCheie;
-	
+
 	public Carte(){
 		titlu = "";
 		referenti = new ArrayList<String>();
@@ -18,7 +18,7 @@ public class Carte {
 		cuvinteCheie = new ArrayList<String>();
 	}
 
-	public String getTitlu() {
+    public String getTitlu() {
 		return titlu;
 	}
 
@@ -28,10 +28,6 @@ public class Carte {
 
 	public List<String> getReferenti() {
 		return referenti;
-	}
-
-	public void setReferenti(List<String> ref) {
-		this.referenti = ref;
 	}
 
 	public String getAnAparitie() {
@@ -46,69 +42,17 @@ public class Carte {
 		return cuvinteCheie;
 	}
 
-	public void setCuvinteCheie(List<String> cuvinteCheie) {
-		this.cuvinteCheie = cuvinteCheie;
-	}
-	
 
-	public void deleteCuvantCheie(String cuvant){
-			for(int i=0;i<cuvinteCheie.size();i++){
-				if(cuvinteCheie.get(i).equals(cuvant)){
-					cuvinteCheie.remove(i);
-					return;
-				}
-			}
-	}
-	
-	public void deleteReferent(String ref){
-			for(int i=0;i<referenti.size();i++){
-				if(referenti.get(i).equals(ref)){
-					referenti.remove(i);
-					return;
-				}
-			}
-	}
-	
-	public void deleteTotiReferentii(){
-		referenti.clear();
-	}
-	
-	public void adaugaCuvantCheie(String cuvant){
-		cuvinteCheie.add(cuvant);
-	}
-	
-	public void adaugaReferent(String ref){
-		referenti.add(ref);
-	}
-	
-	public boolean cautaDupaCuvinteCheie(List<String> cuvinte){
-		for(String c:cuvinteCheie){
-			for(String cuv:cuvinte){
-				if(c.equals(cuv))
-					return true;
-			}
-		}
-		return false;
-	}
-	 
-	public boolean cautaDupaAutor(String autor){
-		for(String a:referenti){
-			if(a.contains(autor))
-				return true;
-		}
-		return false;
-	}
-	
 	@Override
 	public String toString(){
-		String ref = "";
+		StringBuilder ref = new StringBuilder();
 		String cuvCheie = "";
 		
 		for(int i=0;i<referenti.size();i++){
 			if(i==referenti.size()-1)
-				ref+=referenti.get(i);
+				ref.append(referenti.get(i));
 			else
-				ref+=referenti.get(i)+",";
+				ref.append(referenti.get(i)).append(",");
 		}
 		
 		for(int i=0;i<cuvinteCheie.size();i++){
@@ -129,11 +73,11 @@ public class Carte {
 		
 		c.titlu=atr[0];
 		for(String s:referenti){
-			c.adaugaReferent(s);
+			c.getReferenti().add(s);
 		}
 		c.anAparitie = atr[2];
 		for(String s:cuvCheie){
-			c.adaugaCuvantCheie(s);
+			c.getCuvinteCheie().add(s);
 		}
 		
 		return c;

@@ -22,7 +22,6 @@ public class CartiRepoMock implements CartiRepoInterface {
 		carti.add(Carte.getCarteFromString("Dale carnavalului;Caragiale Ion;1948;Litera;caragiale,carnaval"));
 		carti.add(Carte.getCarteFromString("Intampinarea crailor;Mateiu Caragiale;1948;Litera;mateiu,crailor"));
 		carti.add(Carte.getCarteFromString("Test;Calinescu,Tetica;1992;Pipa;am,casa"));
-
 	}
 	
 	@Override
@@ -35,9 +34,9 @@ public class CartiRepoMock implements CartiRepoInterface {
 		List<Carte> carti = getCarti();
 		List<Carte> cartiGasite = new ArrayList<Carte>();
 		int i=0;
-		while (i<=carti.size()){
+		while (i<carti.size()){
 			boolean flag = false;
-			List<String> lref = carti.get(i).getCuvinteCheie();
+			List<String> lref = carti.get(i).getReferenti();
 			int j = 0;
 			while(j<lref.size()){
 				if(lref.get(j).toLowerCase().contains(ref.toLowerCase())){
@@ -60,23 +59,11 @@ public class CartiRepoMock implements CartiRepoInterface {
 	}
 
 	@Override
-	public void modificaCarte(Carte nou, Carte vechi) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void stergeCarte(Carte c) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public List<Carte> getCartiOrdonateDinAnul(String an) {
 		List<Carte> lc = getCarti();
 		List<Carte> lca = new ArrayList<Carte>();
 		for(Carte c:lc){
-			if(c.getAnAparitie().equals(an) == false){
+			if(c.getAnAparitie().equals(an) == true){
 				lca.add(c);
 			}
 		}

@@ -13,7 +13,7 @@ import java.util.List;
 
 public class CartiRepo implements CartiRepoInterface {
 	
-	private String file = "out/cartiBD.txt";
+	private String file = "cartiBD.dat";
 	
 	public CartiRepo(){
 		URL location = CartiRepo.class.getProtectionDomain().getCodeSource().getLocation();
@@ -31,7 +31,16 @@ public class CartiRepo implements CartiRepoInterface {
 			bw.close();
 		} catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+			if(bw != null) {
+				try {
+					bw.close();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
 		}
+
 	}
 
 	@Override
@@ -46,35 +55,30 @@ public class CartiRepo implements CartiRepoInterface {
 			}
 			
 			br.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+			if(br != null) {
+				try {
+					br.close();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
 		}
 		
 		return lc;
 	}
 
-	@Override
-	public void modificaCarte(Carte nou, Carte vechi) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void stergeCarte(Carte c) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public List<Carte> cautaCarte(String ref) {
 		List<Carte> carti = getCarti();
 		List<Carte> cartiGasite = new ArrayList<Carte>();
 		int i=0;
-		while (i<=carti.size()){
+		while (i<carti.size()){
 			boolean flag = false;
-			List<String> lref = carti.get(i).getCuvinteCheie();
+			List<String> lref = carti.get(i).getReferenti();
 			int j = 0;
 			while(j<lref.size()){
 				if(lref.get(j).toLowerCase().contains(ref.toLowerCase())){
@@ -83,7 +87,7 @@ public class CartiRepo implements CartiRepoInterface {
 				}
 				j++;
 			}
-			if(flag == true){
+			if(flag){
 				cartiGasite.add(carti.get(i));
 			}
 			i++;
@@ -96,7 +100,7 @@ public class CartiRepo implements CartiRepoInterface {
 		List<Carte> lc = getCarti();
 		List<Carte> lca = new ArrayList<Carte>();
 		for(Carte c:lc){
-			if(c.getAnAparitie().equals(an) == false){
+			if(c.getAnAparitie().equals(an) == true){
 				lca.add(c);
 			}
 		}
