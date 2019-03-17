@@ -10,6 +10,8 @@ public class Carte {
 	private List<String> referenti;
 	private String anAparitie;
 	private List<String> cuvinteCheie;
+
+	private String editura;
 	
 	public Carte(){
 		titlu = "";
@@ -30,10 +32,6 @@ public class Carte {
 		return referenti;
 	}
 
-	public void setReferenti(List<String> ref) {
-		this.referenti = ref;
-	}
-
 	public String getAnAparitie() {
 		return anAparitie;
 	}
@@ -45,33 +43,6 @@ public class Carte {
 	public List<String> getCuvinteCheie() {
 		return cuvinteCheie;
 	}
-
-	public void setCuvinteCheie(List<String> cuvinteCheie) {
-		this.cuvinteCheie = cuvinteCheie;
-	}
-	
-
-	public void deleteCuvantCheie(String cuvant){
-			for(int i=0;i<cuvinteCheie.size();i++){
-				if(cuvinteCheie.get(i).equals(cuvant)){
-					cuvinteCheie.remove(i);
-					return;
-				}
-			}
-	}
-	
-	public void deleteReferent(String ref){
-			for(int i=0;i<referenti.size();i++){
-				if(referenti.get(i).equals(ref)){
-					referenti.remove(i);
-					return;
-				}
-			}
-	}
-	
-	public void deleteTotiReferentii(){
-		referenti.clear();
-	}
 	
 	public void adaugaCuvantCheie(String cuvant){
 		cuvinteCheie.add(cuvant);
@@ -80,35 +51,17 @@ public class Carte {
 	public void adaugaReferent(String ref){
 		referenti.add(ref);
 	}
-	
-	public boolean cautaDupaCuvinteCheie(List<String> cuvinte){
-		for(String c:cuvinteCheie){
-			for(String cuv:cuvinte){
-				if(c.equals(cuv))
-					return true;
-			}
-		}
-		return false;
-	}
-	 
-	public boolean cautaDupaAutor(String autor){
-		for(String a:referenti){
-			if(a.contains(autor))
-				return true;
-		}
-		return false;
-	}
-	
+
 	@Override
 	public String toString(){
-		String ref = "";
+		StringBuilder ref = new StringBuilder();
 		String cuvCheie = "";
 		
 		for(int i=0;i<referenti.size();i++){
 			if(i==referenti.size()-1)
-				ref+=referenti.get(i);
+				ref.append(referenti.get(i));
 			else
-				ref+=referenti.get(i)+",";
+				ref.append(referenti.get(i)).append(",");
 		}
 		
 		for(int i=0;i<cuvinteCheie.size();i++){
