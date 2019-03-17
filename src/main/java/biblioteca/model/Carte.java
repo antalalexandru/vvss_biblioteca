@@ -11,8 +11,6 @@ public class Carte {
 	private String anAparitie;
 	private List<String> cuvinteCheie;
 
-	private String editura;
-	
 	public Carte(){
 		titlu = "";
 		referenti = new ArrayList<String>();
@@ -20,7 +18,7 @@ public class Carte {
 		cuvinteCheie = new ArrayList<String>();
 	}
 
-	public String getTitlu() {
+    public String getTitlu() {
 		return titlu;
 	}
 
@@ -43,14 +41,7 @@ public class Carte {
 	public List<String> getCuvinteCheie() {
 		return cuvinteCheie;
 	}
-	
-	public void adaugaCuvantCheie(String cuvant){
-		cuvinteCheie.add(cuvant);
-	}
-	
-	public void adaugaReferent(String ref){
-		referenti.add(ref);
-	}
+
 
 	@Override
 	public String toString(){
@@ -82,11 +73,11 @@ public class Carte {
 		
 		c.titlu=atr[0];
 		for(String s:referenti){
-			c.adaugaReferent(s);
+			c.getReferenti().add(s);
 		}
 		c.anAparitie = atr[2];
 		for(String s:cuvCheie){
-			c.adaugaCuvantCheie(s);
+			c.getCuvinteCheie().add(s);
 		}
 		
 		return c;

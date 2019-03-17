@@ -81,7 +81,7 @@ public class Consola {
 			int nrReferenti= Integer.parseInt(line);
 			for(int i=1;i<=nrReferenti;i++){
 				System.out.println("Autor "+i+": ");
-				c.adaugaReferent(console.readLine());
+				c.getReferenti().add(console.readLine());
 			}
 			
 			do{
@@ -91,7 +91,7 @@ public class Consola {
 			int nrCuv= Integer.parseInt(line);
 			for(int i=1;i<=nrCuv;i++){
 				System.out.println("Cuvant "+i+": ");
-				c.adaugaCuvantCheie(console.readLine());
+				c.getCuvinteCheie().add(console.readLine());
 			}
 			
 			bc.adaugaCarte(c);
