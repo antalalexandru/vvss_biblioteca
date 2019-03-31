@@ -2,13 +2,16 @@ package biblioteca.util;
 
 import biblioteca.model.Carte;
 
+import java.util.Calendar;
+
 public class Validator {
 	
-	public static boolean isStringOK(String s) throws Exception{
-		boolean flag = s.matches("[a-zA-Z]+");
-		if(flag == false)
-			throw new Exception("String invalid");
-		return flag;
+	public static boolean isStringOK(String s) {
+		return s.matches("[a-zA-Z ]+");
+	}
+
+	public static boolean validKeyword(String keyword) {
+		return keyword.matches("[a-z]+");
 	}
 	
 	public static void validateCarte(Carte c)throws Exception{
@@ -18,35 +21,28 @@ public class Validator {
 		if(c.getReferenti()==null){
 			throw new Exception("Lista autori vida!");
 		}
-		if(!isOKString(c.getTitlu()))
+		if(!isStringOK(c.getTitlu()))
 			throw new Exception("Titlu invalid!");
+
 		for(String s:c.getReferenti()){
-			if(!isOKString(s))
+			if(!isStringOK(s))
 				throw new Exception("Autor invalid!");
 		}
 		for(String s:c.getCuvinteCheie()){
-			if(!isOKString(s))
+			if(!validKeyword(s))
 				throw new Exception("Cuvant cheie invalid!");
 		}
-		if(!Validator.isNumber(c.getAnAparitie()))
-			throw new Exception("Editura invalid!");
+		if(!Validator.isNumber(c.getAnAparitie()) || !validYear(Integer.parseInt(c.getAnAparitie())))
+			throw new Exception("An aparitie invalid!");
 	}
 	
 	public static boolean isNumber(String s){
 		return s.matches("[0-9]+");
 	}
-	
-	public static boolean isOKString(String s){
-		String []t = s.split(" ");
-		if(t.length==2){
-			boolean ok1 = t[0].matches("[a-zA-Z]+");
-			boolean ok2 = t[1].matches("[a-zA-Z]+");
-			if(ok1==ok2 && ok1==true){
-				return true;
-			}
-			return false;
-		}
-		return s.matches("[a-zA-Z]+");
+
+	public static boolean validYear(int year) {
+		return 0 <= year && year <= Calendar.getInstance().get(Calendar.YEAR);
 	}
+
 	
 }

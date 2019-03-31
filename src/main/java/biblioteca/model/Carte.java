@@ -9,7 +9,16 @@ public class Carte {
 	private String titlu;
 	private List<String> referenti;
 	private String anAparitie;
+	private String editura;
 	private List<String> cuvinteCheie;
+
+	public Carte(String titlu, List<String> referenti, String anAparitie, String editura, List<String> cuvinteCheie) {
+		this.titlu = titlu;
+		this.referenti = referenti;
+		this.anAparitie = anAparitie;
+		this.cuvinteCheie = cuvinteCheie;
+		this.editura = editura;
+	}
 
 	public Carte(){
 		titlu = "";
@@ -42,6 +51,13 @@ public class Carte {
 		return cuvinteCheie;
 	}
 
+	public String getEditura() {
+		return editura;
+	}
+
+	public void setEditura(String editura) {
+		this.editura = editura;
+	}
 
 	@Override
 	public String toString(){
