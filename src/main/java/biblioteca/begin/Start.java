@@ -18,7 +18,7 @@ import java.io.IOException;
 public class Start {
 	
 	public static void main(String[] args) {
-		CartiRepoInterface cr = new CartiRepo();
+		CartiRepoInterface cr = new CartiRepoMock();
 		BibliotecaCtrl bc = new BibliotecaCtrl(cr);
 		Consola c = new Consola(bc);
 		try {
