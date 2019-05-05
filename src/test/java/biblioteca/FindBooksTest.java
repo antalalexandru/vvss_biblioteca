@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FindBooksTest {
-
     private CartiRepoMock cartiRepoMock;
 
     @Before
@@ -42,8 +41,5 @@ public class FindBooksTest {
         List<Carte> result = cartiRepoMock.cautaCarte("Rebreanu");
         Assert.assertEquals(result.size(), 1);
         Assert.assertEquals(result.get(0).getTitlu(), "Shogun");
-
     }
-
-
 }

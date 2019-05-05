@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CartiRepoMock implements CartiRepoInterface {
 
@@ -61,28 +62,11 @@ public class CartiRepoMock implements CartiRepoInterface {
 
     @Override
     public List<Carte> getCartiOrdonateDinAnul(String an) {
-        List<Carte> lc = getCarti();
-        List<Carte> lca = new ArrayList<Carte>();
-        for (Carte c : lc) {
-            if (c.getAnAparitie().equals(an) == true) {
-                lca.add(c);
-            }
-        }
-
-        Collections.sort(lca, new Comparator<Carte>() {
-
-            @Override
-            public int compare(Carte a, Carte b) {
-                if (a.getTitlu().compareTo(b.getTitlu()) == 0) {
-                    return a.getReferenti().get(0).compareTo(b.getReferenti().get(0));
-                }
-
-                return a.getTitlu().compareTo(b.getTitlu());
-            }
-
-        });
-
-        return lca;
+        return getCarti()
+                .stream()
+                .filter(carte -> carte.getAnAparitie().equals(an))
+                .sorted(Comparator.comparing(Carte::getTitlu).thenComparing(carte -> carte.getReferenti().get(0)))
+                .collect(Collectors.toList());
     }
 
 }
